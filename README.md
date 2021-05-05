@@ -7,16 +7,13 @@
 | Column | Type | Option |
 | ------ | ---- | ------ |
 | nickname | string | null: false |
-| email | string | null: false |
+| email | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| password_confirmation | string | null: false |
 | last_name | string | null: false |
 | first_name | string | null: false |
 | last_name_kana | string | null: false |
 | first_name_kana | string | null: false |
-| birth_year | integer | null: false |
-| birth_month | integer | null: false |
-| birth_day | integer | null: false |
+| birthday | date | null: false |
 
 ### Association
 
@@ -29,13 +26,13 @@
 | ------ | ---- | ------ |
 | item_name | string | null: false |
 | description | text | null: false |
-| category | string | null: false |
-| status | string | null: false |
-| charge | string | null: false |
-| area | string | null: false |
-| days | string | null: false |
+| category | integer | null: false |
+| status | integer | null: false |
+| charge | integer | null: false |
+| area | integer | null: false |
+| days | integer | null: false |
 | price | integer | null: false |
-| user_id | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -46,15 +43,14 @@
 
 | Column | Type | Option |
 | ------ | ---- | ------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
 - has_one :address
-- has_one :creditcard
 
 ## addressesテーブル
 
@@ -66,22 +62,8 @@
 | house_number | string | null: false |
 | building_name | string |  |
 | phone_number | string | null: false |
-| purchase_log_id | references | null: false, foreign_key: true |
+| purchase_log | references | null: false, foreign_key: true |
 
 ### Association
-
-- belongs_to :purchase_log
-
-## creditcardテーブル
-
-| Column | Type | Option |
-| ------ | ---- | ------ |
-| card_number | string | null: false |
-| expiration_month | integer | null: false |
-| expiration_year | integer | null: false |
-| security_code | integer | null: false |
-| purchase_log_id | references | null: false, foreign_key: true |
-
-### Association 
 
 - belongs_to :purchase_log
