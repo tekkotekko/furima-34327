@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "商品出品機能" do
+    context "商品の出品ができる時" do
+      it ""
+    end
+    context "商品の出品ができない時" do
+    end
+  end
 end
