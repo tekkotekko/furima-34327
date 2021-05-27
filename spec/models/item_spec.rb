@@ -81,6 +81,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is invalid. Input harf-width characters')
       end
+      it 'priceが半角英数混合では登録できない' do
+        @item.price = 'aaa111'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid. Input harf-width characters')
+      end
+      it 'priceが半角英字では登録できない' do
+        @item.price = 'aaaaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid. Input harf-width characters')
+      end
     end
   end
 end
