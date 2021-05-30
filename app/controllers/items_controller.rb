@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :item_of_current_user?, only: [:edit, :update]
+  before_action :find_item_by_id, only: [:show, :edit, :update]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -20,15 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       render action: :show
     else
@@ -43,8 +41,12 @@ class ItemsController < ApplicationController
                                  :price).merge(user_id: current_user.id)
   end
 
+  def find_item_by_id
+    @item=Item.find(params[:id])
+  end
+
   def item_of_current_user?
-    item = Item.find(params[:id])
-    redirect_to root_path if current_user != item.user
+    find_item_by_id
+    redirect_to root_path if current_user != @item.user
   end
 end
