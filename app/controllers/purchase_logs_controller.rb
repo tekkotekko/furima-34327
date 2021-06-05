@@ -1,8 +1,8 @@
 class PurchaseLogsController < ApplicationController
 
   def index
-    @item=Item.find(params[:id])
-    @purchase_log=Purchase_log.new
+    @item=Item.find(params[:item_id])
+    @purchase_log=PurchaseLog.new
   end
 
 end
