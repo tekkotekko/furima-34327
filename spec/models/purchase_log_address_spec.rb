@@ -79,6 +79,11 @@ RSpec.describe PurchaseLogAddress, type: :model do
         @purchase_log_address.valid?
         expect(@purchase_log_address.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
+      it 'phone_numberが半角英数字混合では保存できないこと' do
+        @purchase_log_address.phone_number = '1234567890a'
+        @purchase_log_address.valid?
+        expect(@purchase_log_address.errors.full_messages).to include('Phone number is invalid. Input only number')
+      end
       it 'phone_numberにハイフンが含まれると保存できないこと' do
         @purchase_log_address.phone_number = '123-4567890'
         @purchase_log_address.valid?
