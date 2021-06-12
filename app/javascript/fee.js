@@ -4,8 +4,8 @@ function fee(){
   const profit=document.getElementById("profit");
   price.addEventListener("keyup", function(){
     const priceValue=price.value;
-    const feeValue=priceValue*0.1;
-    const profitValue=priceValue*0.9;
+    const feeValue=Math.floor(priceValue*0.1);
+    const profitValue=priceValue - feeValue;
     const formatter=new Intl.NumberFormat("ja")
     fee.innerHTML=formatter.format(feeValue);
     profit.innerHTML=formatter.format(profitValue);
